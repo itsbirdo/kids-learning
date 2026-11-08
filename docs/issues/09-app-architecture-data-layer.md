@@ -36,13 +36,13 @@ A clean, testable structure that keeps the platform-specific parts small. Recogn
 | `sessions` | `id, child_id, started_at, ended_at, new_count, review_count, seconds` |
 | `stickers` | `child_id, sticker_id, unit_id, earned_at` |
 | `kv_settings` | `key, value` (family settings) |
-| `usage` | `day, azure_seconds, tts_chars, chat_turns` (local view of the quotas used by #17, #20, #21) |
+| `usage` | `day, azure_seconds, tts_chars` (local view of the Azure quotas used by #17 and #20) |
 
 - Schema versions with tested migrations (`drift` schema dumps in `test/`).
 - `flutter_secure_storage` (Android Keystore) holds the gateway device token and any dev key.
 
 ## Cross-cutting
-- **Feature flags** (family settings): speaking checks, online scoring, custom words, conversation.
+- **Feature flags** (family settings): speaking checks, online scoring, custom words, dialogues.
 - **No analytics, crash-reporting or ads SDKs** (#24). Keep a local rolling debug log that a parent can export from the parent area.
 - **Performance:** cold start under 2 s on the tablet; preload the next activity's clips and images.
 

@@ -24,7 +24,7 @@ One file per GitHub issue, numbered in the order they should be created. GitHub 
 | 18 | [Family gateway (Cloudflare Worker)](18-family-gateway-cloudflare-worker.md) | 3 |
 | 19 | [Calibration toolkit](19-calibration-toolkit.md) | 3 |
 | 20 | [Dynamic speech and custom words](20-dynamic-speech-custom-words.md) | 4 |
-| 21 | [Live conversation (optional)](21-live-conversation-practice.md) | 5 |
+| 21 | [Conversation practice: scripted dialogues (optional)](21-scripted-conversation-practice.md) | 5 |
 | 22 | [Android release and install](22-android-release-install.md) | 6 |
 | 23 | [iPad port](23-ipad-port.md) | 6 |
 | 24 | [Privacy, terms and child safety](24-privacy-terms-child-safety.md) | cross-cutting |

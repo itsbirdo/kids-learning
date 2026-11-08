@@ -18,6 +18,6 @@ A personal, non-commercial Spanish-learning app for kids aged 6–10.
 app/        Flutter app (Android first)
 content/    Lesson content as YAML (source of truth)
 tools/      Python CLI `kl`: validate, build, audio, images, eval
-gateway/    Cloudflare Worker: short-lived tokens, caps, conversation proxy
+gateway/    Cloudflare Worker: short-lived Azure tokens, TTS proxy, caps
 docs/       Plan, ADRs, research, guides
 ```

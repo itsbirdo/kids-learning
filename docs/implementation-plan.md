@@ -19,8 +19,8 @@ Each part of the build is specified in its own issue. The specs live in [`docs/i
 | D3 | Lesson voice: **Azure Neural/HD TTS** by default; ElevenLabs only if the terms review allows | Azure is terms-clean and free within F0; ElevenLabs bars apps aimed at minors without written approval; Gemini is barred for under-18 apps | #4, #7, #24 |
 | D4 | Two-step speech check: **Vosk grammar mode on the device** decides *which* word was said; **Azure Pronunciation Assessment** decides *how well* | Azure often scores ~100 on a wrong single word; Vosk is small, offline and works on any tablet | #16, #17 |
 | D5 | Stars come from thresholds calibrated on our own kids | No published benchmark covers children learning Spanish | #19 |
-| D6 | Tiny Cloudflare Worker gateway for short-lived tokens, caps and moderation | No long-lived keys in the APK; Azure budgets only alert, they don't cap | #18 |
-| D7 | Optional conversation as a push-to-talk chain: Azure STT → Claude → Azure TTS | Terms allow it (unlike Gemini and OpenAI direct); every reply can be checked as text before it is spoken | #21 |
+| D6 | Tiny Cloudflare Worker gateway for short-lived Azure tokens, the custom-word TTS proxy, and caps | No long-lived keys in the APK; Azure budgets only alert, they don't cap | #18 |
+| D7 | **No Claude API and no LLMs** (owner decision, 2026-11-08). Conversation practice is scripted, branching dialogues with pre-generated lines and on-device answer checks | Safe by construction, offline, free; A1-level answers are a small known set, which suits grammar-constrained recognition | #21 |
 | D8 | No analytics, ads or crash SDKs; no child audio stored by default; kids' recordings never in git | Privacy by default | #24 |
 
 ## 3. What the verification changed
@@ -32,7 +32,7 @@ Each part of the build is specified in its own issue. The specs live in [`docs/i
 | ~32% WER for zero-shot Whisper medium on kids | That figure is Whisper-**small** on CSLU spontaneous speech (native English kids); the ~30% non-native figure has no source | Calibrate on our kids (#19) |
 | ElevenLabs $0.05 / $0.10 per 1k chars | About $0.04 (Flash) / $0.08 (v3/v4). `eleven_v4` is current and **can't slow speech** | Slow variants via SSML or `atempo` (#7) |
 | Gemini 3.1 Flash TTS; Gemini Live for conversation | 3.1 TTS is a legacy preview (replaced by 3.8). **Gemini API terms bar apps likely used by under-18s** | Gemini not used at all (#24) |
-| "For personal family use, privacy isn't a concern" | Provider terms apply regardless of publishing. OpenAI needs consent plus zero data retention for under-13 data. Anthropic allows minors with safeguards | Provider set limited to Microsoft and Anthropic (#24) |
+| "For personal family use, privacy isn't a concern" | Provider terms apply regardless of publishing. OpenAI needs consent plus zero data retention for under-13 data. Anthropic allows minors with safeguards, but the owner chose not to use the Claude API | The only cloud provider is Microsoft Azure Speech (#24) |
 | A parent can use Claude app voice mode with the child | Anthropic's consumer apps are 18+ | Parent-led practice only; not part of the app |
 | Android sideloading rules tightening | Sept 2026 enforcement covers participating-store installs in 4 countries only; **ADB is exempt**; global rollout in 2027 | `adb install` path (#22) |
 | iOS: free Apple ID builds last 7 days; TestFlight 90 days | Also: free accounts allow 3 devices and 3 apps per device; **TestFlight terms exclude users under 13**; GitHub macOS runners can build without a Mac | iPad path documented for later (#23) |
@@ -53,16 +53,15 @@ flowchart LR
     E <--> DB[("SQLite progress")]
     S["SystemTts fallback"]
   end
-  subgraph CLOUD["Cloud (optional per feature)"]
+  subgraph CLOUD["Cloud: Azure Speech only (optional)"]
     GW["Cloudflare Worker gateway"]
     PA["Azure Pronunciation Assessment"]
     TTS["Azure TTS"]
-    LLM["Claude API"]
   end
   W -->|"REST + 10-min token"| PA --> D
   TAB -->|"device token"| GW
+  GW -->|"issueToken"| PA
   GW --> TTS
-  GW --> LLM
 ```
 
 ### Components
@@ -105,7 +104,7 @@ flowchart LR
 | **3 Speaking** | [#15 Mic](issues/15-mic-capture-recording.md) · [#16 Vosk check](issues/16-on-device-word-check-vosk.md) · [#17 Azure stars](issues/17-azure-pronunciation-scoring-stars.md) · [#18 Gateway](issues/18-family-gateway-cloudflare-worker.md) · [#19 Calibration](issues/19-calibration-toolkit.md) | Stars agree with the parent on at least 80% of items |
 | **6a Ship v1** | [#22 Android release](issues/22-android-release-install.md) | **MVP**: v1 on the kids' tablet; upgrades keep progress |
 | **4 Dynamic voice** | [#20](issues/20-dynamic-speech-custom-words.md) | Custom words online and offline |
-| **5 Conversation (optional)** | [#21](issues/21-live-conversation-practice.md) | Scenario 1 passes the red-team checklist |
+| **5 Conversation (optional)** | [#21 Scripted dialogues](issues/21-scripted-conversation-practice.md) | Unit 1 dialogue works offline; a 6-year-old finishes it alone |
 | **6b iPad** | [#23](issues/23-ipad-port.md) | Feature parity on iPad |
 | **Cross-cutting** | [#24 Privacy & terms](issues/24-privacy-terms-child-safety.md) · [#25 Testing & playtests](issues/25-testing-qa-playtests.md) | Gates for #7, #17, #21; CI suites; playtests |
 
@@ -135,9 +134,9 @@ Content writing (#5) is the longest human task. Start it in Phase 0.
 | Item | Monthly | Notes |
 |---|---|---|
 | Azure Speech F0 | $0 | 5 audio h of STT/scoring and 0.5M TTS chars. Scoring ≈ 1.7 h per child per month |
-| Azure Speech S0 (only if F0 is exceeded) | ~$1 per audio hour *(verify)* | Likely only with conversation for 2+ kids |
+| Azure Speech S0 (only if F0 is exceeded) | ~$1 per audio hour *(verify)* | Likely only with 3+ kids scoring daily |
 | Cloudflare Worker | $0 | Free plan |
-| Claude (optional conversation) | <$1 (Haiku tier) to ~$3–9 (Opus tier) per child | 10 min/day; set a Console spend limit |
+| Conversation practice (scripted dialogues) | $0 | Runs on the device; no cloud |
 | Lesson audio (one-off) | $0 (Azure F0) or $6–22 (one month of ElevenLabs) | |
 | Distribution | $0 Android; $99/yr for iPad later | |
 
@@ -160,7 +159,8 @@ Content writing (#5) is the longest human task. Start it in Phase 0.
 - [ ] Spanish variety (default es-MX) — #5
 - [ ] Tablet model(s) — #4
 - [ ] Lesson voice and provider — #4, #7, #24
-- [ ] Build conversation at all, and which model tier — #21
+- [x] No Claude API / no LLMs (decided 2026-11-08) — #21, #24
+- [ ] Build scripted conversation practice (Phase 5) at all — #21
 - [ ] Repo visibility (private recommended) — #24
 
 ## 9. Working agreements

@@ -33,7 +33,7 @@ Parents control everything that isn't learning: profiles, limits, online feature
 **Family**
 - Online scoring on/off (#17).
 - Gateway pairing: device token via QR code or paste (#18).
-- Custom word lists (#20) and conversation controls (#21), when built.
+- Custom word lists (#20) and dialogue settings (#21), when built.
 - Backup and restore.
 - Acknowledgements and licences (#8).
 - A plain-language privacy summary (#24).

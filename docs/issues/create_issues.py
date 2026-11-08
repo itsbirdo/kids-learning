@@ -26,7 +26,7 @@ LABELS = {
     "phase-2-core-app": ("c5def5", "Phase 2: offline core app"),
     "phase-3-speaking": ("c5def5", "Phase 3: speaking checks and scoring"),
     "phase-4-dynamic-voice": ("c5def5", "Phase 4: dynamic speech and custom words"),
-    "phase-5-conversation": ("c5def5", "Phase 5: optional live conversation"),
+    "phase-5-conversation": ("c5def5", "Phase 5: optional scripted conversation practice"),
     "phase-6-ship": ("c5def5", "Phase 6: release and platforms"),
     "cross-cutting": ("bfdadc", "Applies across phases"),
     "area: app": ("1d76db", "Flutter app"),

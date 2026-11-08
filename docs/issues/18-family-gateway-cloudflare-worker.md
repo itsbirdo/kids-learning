@@ -2,24 +2,25 @@
 planned_number: 18
 title: "Family gateway (Cloudflare Worker): short-lived tokens, TTS proxy, caps and budgets"
 type: Feature
-labels: [phase-3-speaking, "area: infra", "area: safety"]
+labels: [phase-3-speaking, "area: infra"]
 parent: 1
 ---
 
-**Phase 3 · Size M · Depends on: #3 · Blocks: #17 (production), #20, #21**
+**Phase 3 · Size M · Depends on: #3 · Blocks: #17 (production), #20**
 
 ## Why
 - Keys bundled in an APK can be extracted.
 - One tiny server-side component can:
-  - hand out short-lived tokens;
-  - enforce caps and budgets;
-  - moderate conversation (#21).
+  - hand out short-lived Azure tokens;
+  - proxy runtime TTS;
+  - enforce caps and budgets.
 - A hobby project can run it for free.
+- It talks **only to Azure Speech**. No LLM APIs are used anywhere in this project (owner decision, 2026-11-08).
 
 ## Stack
 - Cloudflare Workers (TypeScript, `wrangler`).
 - **Counters:** one SQLite-backed Durable Object, so they stay consistent.
-- **Secrets:** set with `wrangler secret put`: `AZURE_SPEECH_KEY`, `AZURE_REGION`, `ANTHROPIC_API_KEY` (#21), `ADMIN_SECRET`.
+- **Secrets:** set with `wrangler secret put`: `AZURE_SPEECH_KEY`, `AZURE_REGION`, `ADMIN_SECRET`.
 - **Tests:** `vitest` with the Workers test pool; upstream APIs mocked.
 
 ## Endpoints
@@ -29,7 +30,6 @@ parent: 1
 | GET | `/v1/usage` | 3 | Today's and this month's counters for the parent dashboard (#14) |
 | POST | `/v1/admin/devices` | 3 | Register or revoke device tokens (needs `ADMIN_SECRET`) |
 | POST | `/v1/tts` | 4 | Azure TTS in the house voice (SSML template shared with #7). Character cap per request and per day. Returns mp3 (#20) |
-| POST | `/v1/chat/turn` | 5 | Conversation turn with moderation and caps (#21) |
 
 ## Auth and limits
 - **Device tokens:**
@@ -43,11 +43,9 @@ parent: 1
 | Requests per device per minute | 30 |
 | Speech tokens per day | 200 |
 | TTS characters per day | 2,000 |
-| Chat turns per day | 60 |
-| Chat minutes per day | 15 |
 
 - **Monthly estimated-cost cap,** plus a **kill switch** env var that refuses everything.
-- **Why app-side caps matter:** Azure budgets only *alert*; they don't stop usage. Using **F0** makes the free quota the real cap for speech. Anthropic has a Console spend limit that does stop requests (#21).
+- **Why app-side caps matter:** Azure budgets only *alert*; they don't stop usage. Using **F0** makes the free quota the real cap.
 
 ## Privacy
 - Never log bodies, audio or transcripts. Log only status, latency, endpoint and counter changes.

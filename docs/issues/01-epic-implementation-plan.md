@@ -34,8 +34,8 @@ The research was re-checked on 2026-11-08; the four verification reports are in 
    - Gemini API, Firebase AI Logic and Google Cloud generative AI bar apps likely used by under-18s, so Gemini Live and Gemini TTS are out.
    - ElevenLabs bars apps aimed at minors unless it approves them in writing.
    - OpenAI needs parental consent, plus zero data retention for under-13 data.
-   - Microsoft (no age clause found) and Anthropic (allows minors with safeguards) are the clean options.
-6. **Live conversation** becomes a push-to-talk chain: Azure STT → Claude → Azure TTS. It runs behind a small gateway with moderation and hard caps (#21). It is optional.
+   - Microsoft Azure Speech (no age clause found) is the clean option, and the only cloud provider in the plan.
+6. **No Claude API and no LLMs (owner decision).** Conversation practice is **scripted, branching dialogues** (#21). Character lines are pre-generated audio, and the child's answers are checked on the tablet by Vosk. It works fully offline, is safe by construction, and costs nothing to run. It is optional.
 7. **Installing on Android:** `adb install` stays exempt from Google's developer verification. No fees (#22).
 
 ## Architecture
@@ -53,16 +53,15 @@ flowchart LR
     V --> D["Decision + stars"]
     E <--> DB[("Local SQLite progress")]
   end
-  subgraph CLOUD["Cloud (per feature, optional)"]
+  subgraph CLOUD["Cloud: Azure Speech only (optional)"]
     GW["Cloudflare Worker gateway"]
     PA["Azure Pronunciation Assessment"]
     TTS["Azure TTS"]
-    LLM["Claude API"]
   end
   W -->|"REST + 10-min token"| PA --> D
   TAB -->|"device token"| GW
+  GW -->|"issueToken"| PA
   GW --> TTS
-  GW --> LLM
 ```
 
 ## Roadmap
@@ -73,7 +72,7 @@ flowchart LR
 | 2 Core app (offline) | #9 Architecture & data · #10 Audio playback · #11 Lesson engine & activities · #12 Spaced repetition · #13 Kid UX & rewards · #14 Parent area | Playable listening lessons |
 | 3 Speaking | #15 Mic capture · #16 On-device word check · #17 Azure scoring & stars · #18 Gateway · #19 Calibration | Kids say words and earn stars |
 | 4 Dynamic voice | #20 | Names, custom word lists, offline fallback voice |
-| 5 Conversation (optional) | #21 | Short supervised role-play chats |
+| 5 Conversation (optional) | #21 | Scripted, branching role-play dialogues, offline |
 | 6 Ship & extend | #22 Android release & install · #23 iPad port | On the kids' tablet; iPad later |
 | Cross-cutting | #24 Privacy, terms & child safety · #25 Testing & playtests | |
 
@@ -94,16 +93,17 @@ flowchart LR
 - [ ] Spanish variety (default: Latin American / Mexican) — #5
 - [ ] Which tablet(s) the kids will use — #4
 - [ ] Lesson voice and provider, after an audition and a terms review — #4, #7, #24
-- [ ] Whether to build live conversation, and which Claude model tier — #21
+- [x] No Claude API / no LLMs (decided 2026-11-08) — #21, #24
+- [ ] Whether to build scripted conversation practice (Phase 5) — #21
 - [ ] Keep this repo private? (It may hold kids' names and progress exports) — #24
 
 ## Running costs (estimates — check current prices)
 | Item | Cost |
 |---|---|
-| Azure Speech F0 (free tier): 5 audio hours/month of speech-to-text and pronunciation scoring, 0.5M TTS characters | $0. Scoring is about 1.7 h per child per month; with conversation for 2 kids, you may need the paid S0 tier (about $1 per audio hour, verify) |
+| Azure Speech F0 (free tier): 5 audio hours/month of speech-to-text and pronunciation scoring, 0.5M TTS characters | $0. Scoring is about 1.7 h per child per month, so 2 kids fit. A 3rd child may need the paid S0 tier (about $1 per audio hour, verify) |
 | Cloudflare Worker gateway | $0 (free plan) |
 | Lesson audio generation (one-off) | $0 on Azure F0; about $6–22 for one month of ElevenLabs if chosen |
-| Conversation (optional), daily 10 min per child | Under $1/month on the Haiku tier, about $3–9/month on the Opus tier |
+| Conversation practice (scripted, on-device) | $0 |
 | Android installs | $0 |
 | iPad later | $99/year Apple Developer Program |
 

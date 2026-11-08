@@ -46,7 +46,7 @@ stories:
       - { id: q1, prompt_es: "¿Dónde está el perro?", options: [fluent/dog, fluent/cat, fluent/fish], answer: fluent/dog }
 tpr:
   - { id: toca_el_perro, es: "Toca el perro.", target: perro }
-scenarios: []             # conversation role-plays for #21 (optional)
+dialogues: []             # scripted branching role-plays for #21 (optional; format in #21)
 ```
 - `content/global/` holds `feedback.yaml`, `prompts.yaml` (EN instructions and ES classroom prompts) and `routines.yaml`.
 - `content/local/family.yaml` holds kids' names and nicknames. It is **gitignored** and read only at build time (#24).
@@ -74,7 +74,8 @@ IDs are stable forever: progress in the app is keyed by them (#9). Renaming an I
    - Out-of-vocabulary items are marked `azure_only` and listed as warnings. Find the model's word list file inside its `graph/` folder *(verify the file name)*.
 5. Text conventions: ¿¡ punctuation, articles on nouns, numbers written as words, a trailing period on single words.
 6. Sanity limits: new items per unit, phrase length for ages 6–8.
-7. Optional: a Spanish spell check (hunspell `es`).
+7. Dialogue graphs (#21): every node reachable, every non-end node has a hint, every path reaches `success`, every line has audio.
+8. Optional: a Spanish spell check (hunspell `es`).
 
 **Other commands**
 | Command | What it does |

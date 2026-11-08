@@ -53,7 +53,7 @@ The format is defined in #6.
 - **One picture story**, 3–6 lines, with 2–3 tap-the-picture comprehension questions.
 - **TPR commands** that reuse the Unit 1 classroom words (escucha, mira, repite, toca).
 - **A chant or song (optional).** Use original lyrics or public-domain traditional songs, e.g. "Cabeza, hombros, rodillas y pies". Check public-domain status. A parent records it, or it's a TTS chant.
-- **A conversation scenario** for #21 (optional, later): goal, vocabulary, 3–5 target exchanges.
+- **A scripted dialogue** for #21 (optional, later): a short branching role-play (6–12 nodes) with expected answers, hints and pre-generated character lines.
 - **A can-do statement**, plus a parent note with offline practice ideas.
 
 ## Global content (`content/global/`)
@@ -86,7 +86,7 @@ The validator in #6 enforces these where it can.
 - [ ] Global feedback, prompts and routines
 - [ ] Units 4–8
 - [ ] Units 9–12
-- [ ] Conversation scenarios for Units 1, 2, 6, 8 and 9 (only if #21 goes ahead)
+- [ ] Scripted dialogues for Units 1, 2, 6, 8 and 9 (only if #21 goes ahead)
 
 ## Acceptance criteria
 - [ ] Units 1–3 authored, reviewed and passing `kl validate`, so #7 and #11 are unblocked

@@ -16,7 +16,7 @@ The final pick comes from the audition in #4 and the terms review in #24.
 
 | Provider | Status | Notes |
 |---|---|---|
-| **Azure Neural/HD TTS** | **Default, terms-clean** | No minors clause found in Microsoft's terms. The F0 tier includes 0.5M characters/month, and one full pass is about 35k characters. The same voice can be used at runtime for custom words (#20) and conversation (#21), so the app sounds consistent |
+| **Azure Neural/HD TTS** | **Default, terms-clean** | No minors clause found in Microsoft's terms. The F0 tier includes 0.5M characters/month, and one full pass is about 35k characters. The same voice can be used at runtime for parent-added custom words (#20), so the app sounds consistent |
 | ElevenLabs `eleven_v4` | Quality option, only if #24 clears it | The usage policy bars apps "directed at individuals under 18… unless approved in writing". Use it only if #24 concludes pre-generated offline clips are fine, or we get written approval. The free plan is non-commercial and requires attribution |
 | Gemini TTS (`gemini-3.8-flash-tts`) | **Excluded** | Gemini API terms bar apps "likely to be accessed by individuals under the age of 18". Google hasn't said whether that covers offline clips |
 | Kokoro | Not used | Spanish voices are ungraded and weak on short utterances; needs GPL espeak-ng |

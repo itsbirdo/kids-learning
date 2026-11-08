@@ -20,7 +20,7 @@ Bugs caught in CI before they reach the tablet; app design checked against how o
 | Integration (device) | `integration_test` (Patrol if permission dialogs need driving) | First run → profile → full session; mic permission; airplane mode; interruptions |
 | Native | JUnit (Kotlin) | Vosk bridge with an adult or TTS fixture WAV (#16) |
 | Tools | `pytest` | Validator rules, phonetic key, cache keys, post-processing, eval metrics |
-| Gateway | `vitest` (Workers pool) | Auth, caps, caching, kill switch, upstream errors, moderation (#18/#21) |
+| Gateway | `vitest` (Workers pool) | Auth, caps, caching, kill switch, upstream errors (#18) |
 
 **Speech regression without kids' audio**
 - Commit recognizer and scorer **JSON outputs** from calibration runs (#19) as fixtures. CI replays them through the Dart matcher and star logic and checks the expected decisions.
@@ -46,7 +46,7 @@ Bugs caught in CI before they reach the tablet; app design checked against how o
 | Clip latency | < 150 ms |
 | Vosk check | < 500 ms |
 | Azure round trip (median) | < 1.5 s |
-| Conversation reply start (median) | < 3 s |
+| Dialogue: end of child's speech → next line | < 1 s |
 | APK (arm64) | < 150 MB |
 | Memory | < 400 MB |
 
