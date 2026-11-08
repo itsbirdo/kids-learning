@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Secrets and signing (see docs/issues/24)
+.env
+.env.*
+*.keystore
+*.jks
+key.properties
+app/.env.local.json
+
+# Kids' data must never be committed (see docs/issues/24)
+content/local/
+recordings/
+*.wav
+!tools/tests/fixtures/**/*.wav
