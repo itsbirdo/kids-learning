@@ -6,7 +6,7 @@ labels: [phase-1-content, "area: content"]
 parent: 1
 ---
 
-**Phase 1 · Size L (ongoing; Units 1–3 first) · Depends on: #4 (Spanish variety) · Blocks: #7, #8, #11, #21 scenarios**
+**Phase 1 · Size L (ongoing; Units 1–3 first) · Depends on: #4 (Spanish variety) · Blocks: #7, #8, #11, #21 dialogues**
 
 ## Goal
 Write the learning content. This is the biggest human task in the project. Units 1–3 unblock the app; the rest follow while Phase 2 is built.

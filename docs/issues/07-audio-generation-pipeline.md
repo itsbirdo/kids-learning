@@ -9,7 +9,7 @@ parent: 1
 **Phase 1 · Size L · Depends on: #4 (voice choice), #5, #6, #24 (terms review) · Blocks: #10, #11**
 
 ## Goal
-Every fixed clip (words, phrases, stories, prompts, feedback, name lines) is generated once in the best acceptable voice. Each clip is then trimmed, loudness-normalised, checked by machine, approved by a parent, and bundled. Only free-form speech (#20, #21) needs live TTS.
+Every fixed clip (words, phrases, stories, prompts, feedback, name lines, dialogue lines) is generated once in the best acceptable voice. Each clip is then trimmed, loudness-normalised, checked by machine, approved by a parent, and bundled. Only parent-added custom words (#20) need live TTS.
 
 ## Choosing the provider
 The final pick comes from the audition in #4 and the terms review in #24.
@@ -47,6 +47,7 @@ Roughly 1,500 clips, 35k characters and 60 minutes of audio:
 - prompts (ES classroom + EN instructions)
 - feedback lines
 - routines
+- dialogue lines for #21, if built
 - name lines, generated from `content/local/family.yaml`, which is never committed
 
 ## Cache key and manifest
