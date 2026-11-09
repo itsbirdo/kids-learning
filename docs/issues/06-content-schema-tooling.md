@@ -28,16 +28,37 @@ items:
     say: ["perro", "el perro"]   # accepted answers for the speech check
     en: "dog"
     gender: m
+    category: animal      # for mixing new-word sets across categories (#11, methodology R3)
+    cognate: false        # true for elefante, tigre… (introduced early as quick wins)
     image: fluent/dog
-    gesture: "hands like paws"
+    gesture: "hands like paws"   # the child copies it (R2); brief for the animator
     distractors: [pero, pelo, pez]
     hard_sounds: [rr]
     variants: {}          # e.g. { es-ES: { es: "…" } }
+chunks:                   # reusable phrases with a slot (R1)
+  - id: me_gusta
+    es: "Me gusta {slot}."
+    en: "I like {slot}."
+    slot_items: [perro, gato, pez]
 phrases:
   - id: me_gusta_el_perro
     es: "Me gusta el perro."
     en: "I like the dog."
     items: [perro]
+dialogue:                 # core dialogue, 4–8 lines, two voices (R1, R15)
+  id: u04_dialogue
+  roles: { a: mascot, b: friend }
+  lines:
+    - { id: d1, role: a, es: "¿Te gusta el perro?", chunks: [te_gusta] }
+    - { id: d2, role: b, es: "Sí, me gusta el perro. ¿Y a ti?", chunks: [me_gusta],
+        buildup: ["¿Y a ti?", "me gusta el perro", "Sí, me gusta el perro. ¿Y a ti?"],
+        variation: { chunk: me_gusta, slot_items: [gato, pez] } }
+tips:                     # ages 8–10 only, shown after use (R7)
+  - { id: u04_tip_el_la, min_age: 8, en: "Notice: el perro, el gato — but la vaca.", after: [perro, vaca] }
+parent_card:              # grown-up turn (R21, #14)
+  chunk_of_week: [me_gusta, te_gusta]
+  teach_me: [perro, gato, pez, vaca]
+  ideas: ["Point at animals in a picture book and ask ¿Qué es?"]
 stories:
   - id: u04_story
     lines:
@@ -46,7 +67,7 @@ stories:
       - { id: q1, prompt_es: "¿Dónde está el perro?", options: [fluent/dog, fluent/cat, fluent/fish], answer: fluent/dog }
 tpr:
   - { id: toca_el_perro, es: "Toca el perro.", target: perro }
-dialogues: []             # scripted branching role-plays for #21 (optional; format in #21)
+roleplays: []             # optional branching role-plays for #21, built on the core dialogue (format in #21)
 ```
 - `content/global/` holds `feedback.yaml`, `prompts.yaml` (EN instructions and ES classroom prompts) and `routines.yaml`.
 - `content/local/family.yaml` holds kids' names and nicknames. It is **gitignored** and read only at build time (#24).
@@ -74,8 +95,15 @@ IDs are stable forever: progress in the app is keyed by them (#9). Renaming an I
    - Out-of-vocabulary items are marked `azure_only` and listed as warnings. Find the model's word list file inside its `graph/` folder *(verify the file name)*.
 5. Text conventions: ¿¡ punctuation, articles on nouns, numbers written as words, a trailing period on single words.
 6. Sanity limits: new items per unit, phrase length for ages 6–8.
-7. Dialogue graphs (#21): every node reachable, every non-end node has a hint, every path reaches `success`, every line has audio.
-8. Optional: a Spanish spell check (hunspell `es`).
+7. **Teaching-rule checks** ([`docs/learning-methodology.md`](../learning-methodology.md)):
+   - every item has `category` and `gesture`;
+   - every unit has a core `dialogue` of 4–8 lines, a story, chunks and a `parent_card`;
+   - every dialogue line's chunks exist;
+   - lines over 4 words have a `buildup`;
+   - each unit's story and dialogue together use at least half of the unit's items;
+   - `tips` have `min_age` ≥ 8.
+8. Branching role-play graphs (#21): every node reachable, every non-end node has a hint, every path reaches `success`, every line has audio.
+9. Optional: a Spanish spell check (hunspell `es`).
 
 **Other commands**
 | Command | What it does |

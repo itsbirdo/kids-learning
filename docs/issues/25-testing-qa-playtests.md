@@ -59,6 +59,22 @@ Bugs caught in CI before they reach the tablet; app design checked against how o
   - Separate observations for ages 6–7 and 8–10.
 - **Record:** written notes in `docs/playtests/YYYY-MM-DD.md`, with **no video, audio or full names**. Turn findings into issues.
 
+## Learning checks (are the teaching rules working?)
+Measure against the realistic goals in [`docs/learning-methodology.md`](../learning-methodology.md) §6, never "fluency".
+- **Monthly, about 5 minutes per child, run by a parent from the parent area:**
+  - a 10-item listening check: hear a word or phrase, tap the picture. Use items from 2–4 weeks ago, not today's.
+  - 5 picture → say items;
+  - one core dialogue performed with the parent.
+- **Track over time:**
+  - retention of items 2+ weeks old;
+  - share of review sessions above the 75% accuracy brake (#11);
+  - number of dialogues performed;
+  - the child's own answer to "¿Te gusta español?" (attitude is the most reliable early-start gain).
+- **If retention is poor:** check that the rules are actually happening before blaming them. The research warns that the benefits vanish when the methods get diluted (Goossens et al. 2016). Use the logs to check:
+  - retrievals per new item (at least 3 on day one, at least 2 on day two);
+  - first review the next day;
+  - mixed-category batches.
+
 ## Tasks
 - [ ] Test scaffolding and coverage reporting in CI (#3)
 - [ ] Golden test setup with fixed fonts

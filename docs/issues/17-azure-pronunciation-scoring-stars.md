@@ -55,11 +55,14 @@ Pronunciation-Assessment: base64({"ReferenceText":"el perro","GradingSystem":"Hu
 
    - Age-band offsets: −5 for ages 6–7, +5 for ages 9–10. Add the per-child strictness offset (#14).
    - Hysteresis: show the best attempt, and never lower stars already shown.
-5. **Feedback.**
-   - Praise first.
-   - At most **one** word to retry (the lowest one under 50), with its model clip.
+5. **Feedback** ([`docs/learning-methodology.md`](../learning-methodology.md) R16, R17).
+   - Praise first, specifically.
+   - At most **one** word to retry (the lowest one under 50).
+   - **Hint before model:** first prompt self-correction ("¿Cómo se dice…?" with the picture and first syllable), then play the model clip. Prompts beat recasts, especially for younger learners (Lyster & Saito 2010).
    - Tips come from content `hard_sounds` (rr, j, ñ), not from phoneme scores.
-6. **Retries.** At most 3. Then play the model, award the best score, move on, and re-queue the item through the SRS (#12).
+   - **Ages 6–7:** if the wrong-word check (#16) rejects an attempt but Azure heard speech, report `uncertain` (no SRS change, #12), give 1★, play the model and move on.
+   - A parent override in parent-present mode counts as correct (#14).
+6. **Retries.** At most 3. Then play the model, award the best score, move on, and re-queue the item: in the session's end check (#11) and through the SRS (#12).
 7. **Auto-tune** (weekly, bounded ±10): if a child gets more than 85% 3★, raise the threshold by 3; under 40%, lower it by 3.
 
 ## Offline or quota-exhausted mode

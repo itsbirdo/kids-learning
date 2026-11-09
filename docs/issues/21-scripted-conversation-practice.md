@@ -6,7 +6,7 @@ labels: [phase-5-conversation, "area: speech", "area: content"]
 parent: 1
 ---
 
-**Phase 5 · Size M–L · Depends on: #5 (dialogues), #7 (audio), #10, #15, #16 · Optional, after the MVP**
+**Phase 5 · Size M–L · Depends on: #5 (dialogues), #7 (audio), #10, #11 (core-dialogue stages), #15, #16 · Optional, after the MVP**
 
 ## Goal
 Short role-plays (3–6 minutes) tied to a lesson, where a friendly character talks with the child in simple Spanish and reacts to what the child says. Examples: meeting a new friend, counting toys, ordering at a taquería, "Simón dice", "What are you wearing?".
@@ -22,9 +22,15 @@ Short role-plays (3–6 minutes) tied to a lesson, where a friendly character ta
   - **Pedagogically sound:** at this level the child's useful answers are a small, known set (A1 phrases from the unit), which is exactly what grammar-constrained recognition is good at.
 - **If free-form chat is ever wanted:** that would need its own terms review (#24). The only terms-clean option found was Azure OpenAI under Microsoft's terms. Out of scope for this plan.
 
-## Dialogue format (authored in content, validated by #6)
+## How this relates to the core dialogues
+- Every unit already has a **core dialogue**, learned in stages in normal sessions (#5, #11): listen → repeat with build-up → take a role → swap roles → slot variation. That is part of the MVP.
+- This issue adds the optional next step: **branching** role-plays, where the character reacts to *which* answer the child gives.
+- This follows the interaction research: negotiating meaning helps learning (Long; Mackey & Goo 2007; Oliver 1998 with 8–13-year-olds). An app can only simulate contingency, so offer a choice of replies.
+- **Parent mode:** a parent can take the character's role from a printed or on-screen script, then swap with the child. Live turn-taking is the strongest form (methodology R21).
+
+## Role-play format (authored in content, validated by #6)
 ```yaml
-dialogues:
+roleplays:
   - id: u01_new_friend
     unit: u01
     character: mascot
@@ -89,7 +95,7 @@ dialogues:
 - Write them alongside the unit content (#5). One review covers the text and the approved audio.
 
 ## Tasks
-- [ ] Dialogue schema plus validator rules (#6), including the graph checks
+- [ ] Role-play schema plus validator rules (#6), including the graph checks
 - [ ] Dialogue runner (pure Dart, `domain/`): node state, answer matching via the #16 matcher, hint and model-answer fallback, slots
 - [ ] Dialogue screen: mascot, speech bubble with an emoji cue, mic button, picture choices
 - [ ] First dialogue: Unit 1, "Meet a new friend". Then Units 2, 6, 8 and 9

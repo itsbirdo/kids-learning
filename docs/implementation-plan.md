@@ -22,6 +22,7 @@ Each part of the build is specified in its own issue. The specs live in [`docs/i
 | D6 | Tiny Cloudflare Worker gateway for short-lived Azure tokens, the custom-word TTS proxy, and caps | No long-lived keys in the APK; Azure budgets only alert, they don't cap | #18 |
 | D7 | **No Claude API and no LLMs** (owner decision, 2026-11-08). Conversation practice is scripted, branching dialogues with pre-generated lines and on-device answer checks | Safe by construction, offline, free; A1-level answers are a small known set, which suits grammar-constrained recognition | #21 |
 | D8 | No analytics, ads or crash SDKs; no child audio stored by default; kids' recordings never in git | Privacy by default | #24 |
+| D9 | **Evidence-based teaching method:** hear → do → say → use → review. Core dialogues and chunks (from the Army Method / FSI), spaced retrieval after sleep, gestures, mixed word sets, hint-first feedback, no completion rewards, a parent "grown-up turn". See [`learning-methodology.md`](learning-methodology.md) | Peer-reviewed research (2026-11-09 review); the military methods' useful core without their intensity | #5, #6, #11–#14, #17, #21, #25 |
 
 ## 3. What the verification changed
 | Research notes said | Verified on 2026-11-08 | Plan impact |
@@ -36,6 +37,22 @@ Each part of the build is specified in its own issue. The specs live in [`docs/i
 | A parent can use Claude app voice mode with the child | Anthropic's consumer apps are 18+ | Parent-led practice only; not part of the app |
 | Android sideloading rules tightening | Sept 2026 enforcement covers participating-store installs in 4 countries only; **ADB is exempt**; global rollout in 2027 | `adb install` path (#22) |
 | iOS: free Apple ID builds last 7 days; TestFlight 90 days | Also: free accounts allow 3 devices and 3 apps per device; **TestFlight terms exclude users under 13**; GitHub macOS runners can build without a Mac | iPad path documented for later (#23) |
+
+## 3a. How the app teaches
+The full method, with citations, is in [`learning-methodology.md`](learning-methodology.md). It is based on three research reviews in [`research/`](research/). These used peer-reviewed and university sources only (including Harvard work on age effects and parent–child conversation) and excluded app-specific studies.
+
+- **The loop:** every word and phrase goes **hear it → do it → say it → use it → review it**, spread over days.
+- **The "Army Method":** the WWII Army Specialized Training Program (1943–44). Its success was mostly intensity and selected adult learners, never controlled-tested. We keep its useful core: native-speaker models, short dialogues memorised by imitation, backward build-up, meaningful slot drills, and daily regularity. We drop the intensity, long drills and grammar lectures.
+- **Memory science:** retrieval rather than re-exposure; spacing within the session and after sleep; expanding reviews out to 120 days; small, age-matched batches of new words that mix categories.
+- **Second-language research:**
+  - listen before speaking;
+  - chunks with slots;
+  - a gesture for every word;
+  - stories heard again and again;
+  - prompting self-correction before giving the answer;
+  - optional one-line grammar tips for ages 8–10 only.
+- **Motivation and family:** progress shown as mastery, with surprise rewards but no rewards for finishing. A 5-minute "grown-up turn" makes the parent the live conversation partner.
+- **Realistic goals** at 10–15 min/day (about 60–90 h/year): CEFR Pre-A1/A1. That means strong listening, a few hundred words plus chunks, 12 performable dialogues and a positive attitude, but not accurate free grammar.
 
 ## 4. Architecture
 ```mermaid

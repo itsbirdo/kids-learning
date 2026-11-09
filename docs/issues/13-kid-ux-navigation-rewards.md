@@ -18,32 +18,40 @@ A 6-year-old who can't read yet can start, play and finish a session alone. The 
 - **Big targets:** at least 64 dp, with generous spacing.
 - **Layout:** landscape tablet layout, one clear action per screen.
 
-**Healthy motivation**
-- Positive, informational feedback, e.g. "¡Aprendiste 5 animales!".
-- Occasional *surprise* rewards rather than rewards tied to performance.
+**Healthy motivation** (R20 in [`docs/learning-methodology.md`](../learning-methodology.md))
+- **Informational feedback**, specific to what the child did: "¡Aprendiste 5 animales!", "You remembered *perro* from last week!". Informational feedback raises motivation.
+- **No completion-contingent rewards.** Expected rewards for doing or finishing a task *lower* children's later motivation (Deci, Koestner & Ryan 1999: d ≈ −0.36 for completion-contingent rewards; tangible rewards are worse for children than adults).
+- **Progress is shown as mastery,** not paid for: a "words I can say" collection and the unit map filling in.
+- **Rewards are occasional surprises,** never promised in advance.
+- **Praise is about the work, not the child** ("You worked that one out!"). Expect small effects (Li & Bates 2019; Sisk et al. 2018).
 
 **Hard "no" list**
 - lives or hearts
 - timers
 - leaderboards
 - streaks that can be lost
+- rewards promised for finishing a lesson or unit
 - push notifications to the child
 - autoplay into another session
 - ads, purchases, or external links outside the parent gate
 
 ## Screens
 1. **Who's playing?** Avatars for each child.
-2. **Home.** A big "¡Vamos!" play button, the unit map (path with stickers), and the sticker book.
+2. **Home.** A big "¡Vamos!" play button, the unit map (a path that fills in as words are mastered), the "words I can say" collection, and the sticker book.
 3. **Session.** Activity frame, a progress caterpillar (no countdown), and a pause button.
-4. **End.** Recap, sticker reveal, and the mascot waving "¡Hasta mañana!". Then back home.
+4. **End.** Informational recap of today's words (with play buttons), the **grown-up turn card** (#14), and the mascot waving "¡Hasta mañana!". Sometimes a surprise sticker. Then back home.
 5. **Parent gate entry.** A small corner button that needs a 3-second hold, then the PIN (#14).
 
 ## Rewards
-- **Stickers:**
-  - one per unit completed;
-  - surprise stickers now and then (about 1 in 5 sessions, random, never "earned");
+- **Mastery displays** (the main motivator):
+  - a "words I can say" collection: each word appears when its `say` card reaches box 3 (#12), and tapping it plays the child's model clip;
+  - the unit map fills in as words are recognised and said;
+  - unit completion is shown as the map reaching the next place, not as a prize.
+- **Surprise stickers:**
+  - now and then, about 1 in 5 sessions, at random;
+  - never announced in advance and never "earned" by finishing;
   - a sticker book to browse.
-- **Speaking stars:** 1–3 stars per item (#17). **Never 0**: trying always earns a star.
+- **Speaking stars:** 1–3 stars per item (#17). **Never 0**: trying always earns a star. Stars are feedback on that attempt, not currency; there is nothing to spend them on.
 - **Mascot:** reacts warmly; never disappointed.
 
 ## Look and feel

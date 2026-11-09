@@ -37,6 +37,13 @@ The research was re-checked on 2026-11-08; the four verification reports are in 
    - Microsoft Azure Speech (no age clause found) is the clean option, and the only cloud provider in the plan.
 6. **No Claude API and no LLMs (owner decision).** Conversation practice is **scripted, branching dialogues** (#21). Character lines are pre-generated audio, and the child's answers are checked on the tablet by Vosk. It works fully offline, is safe by construction, and costs nothing to run. It is optional.
 7. **Installing on Android:** `adb install` stays exempt from Google's developer verification. No fees (#22).
+8. **Evidence-based teaching method** ([`docs/learning-methodology.md`](../learning-methodology.md), researched 2026-11-09 from peer-reviewed and university sources; app-specific studies excluded). Every word goes through **hear it → do it → say it → use it → review it**.
+   - **From the WWII Army Method:** native-speaker models, short dialogues learned by imitation, and build-up drills.
+   - **From memory science:** spaced retrieval with the first review after sleep.
+   - **From second-language research:** reusable chunks, gestures, mixed word sets, and hint-first feedback.
+   - **From motivation research:** no rewards for finishing.
+   - **For the family:** a 5-minute "grown-up turn" for the parent.
+   - It changes #5, #6, #11, #12, #13, #14, #17, #21 and #25.
 
 ## Architecture
 ```mermaid

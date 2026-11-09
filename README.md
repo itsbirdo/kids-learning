@@ -11,7 +11,8 @@ A personal, non-commercial Spanish-learning app for kids aged 6–10.
 - [Implementation plan](docs/implementation-plan.md): architecture, phases, decisions and the issue index.
 - [Issue specs](docs/issues/): one detailed spec per part of the build (mirrored as GitHub issues).
 - [ADR-001: Flutter, Android first](docs/adr/0001-flutter-android-first.md)
-- [Research](docs/research/): the original research notes, plus verification reports from 2026-11-08.
+- [Learning method](docs/learning-methodology.md): how the app teaches, and the research behind it.
+- [Research](docs/research/): the original research notes, the 2026-11-08 verification reports, and the 2026-11-09 learning-method reviews.
 
 ## Planned layout
 ```
