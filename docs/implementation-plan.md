@@ -1,6 +1,6 @@
 # Implementation plan: Spanish learning app for kids
 
-Date: 2026-11-08 · Status: proposed. Based on the [research notes](research/2026-11-08-original-research-notes.md) and four [verification reports](research/).
+Date: 2026-11-08 · Status: proposed. Based on the [research notes](research/2026-11-08-original-research-notes.md), four [verification reports](research/), the [learning-method review](learning-methodology.md) and the [multi-language check](research/2026-11-09-multilanguage-german.md).
 
 Each part of the build is specified in its own issue. The specs live in [`docs/issues/`](issues/) and are mirrored as GitHub issues #1–#25; this document is the overview.
 
@@ -23,6 +23,7 @@ Each part of the build is specified in its own issue. The specs live in [`docs/i
 | D7 | **No Claude API and no LLMs** (owner decision, 2026-11-08). Conversation practice is scripted, branching dialogues with pre-generated lines and on-device answer checks | Safe by construction, offline, free; A1-level answers are a small known set, which suits grammar-constrained recognition | #21 |
 | D8 | No analytics, ads or crash SDKs; no child audio stored by default; kids' recordings never in git | Privacy by default | #24 |
 | D9 | **Evidence-based teaching method:** hear → do → say → use → review. Core dialogues and chunks (from the Army Method / FSI), spaced retrieval after sleep, gestures, mixed word sets, hint-first feedback, no completion rewards, a parent "grown-up turn". See [`learning-methodology.md`](learning-methodology.md) | Peer-reviewed research (2026-11-09 review); the military methods' useful core without their intensity | #5, #6, #11–#14, #17, #21, #25 |
+| D10 | **Multi-language by design:** language packs (`content/<lang>/` + `language.yaml`) and a shared concept bank; per-child courses; German as the second pack after Spanish v1. See [ADR-002](adr/0002-language-packs.md) | Every component has a German equivalent (Vosk de, Azure `de-DE` scoring and voices, Piper Thorsten, Kölner Phonetik); adding the language key before any progress data exists is cheap | #26, #27 |
 
 ## 3. What the verification changed
 | Research notes said | Verified on 2026-11-08 | Plan impact |
@@ -117,12 +118,13 @@ flowchart LR
 |---|---|---|
 | **0 Foundations** | [#2 Stack ADR](issues/02-decision-flutter-android-first.md) · [#3 Scaffolding & CI](issues/03-scaffolding-repo-ci.md) · [#4 Spike](issues/04-spike-speech-voice-validation.md) | Placeholder app on the tablet, CI green, speech and voice go/no-go recorded |
 | **1 Content** | [#5 Curriculum](issues/05-curriculum-lesson-content.md) · [#6 Schema & tools](issues/06-content-schema-tooling.md) · [#7 Audio pipeline](issues/07-audio-generation-pipeline.md) · [#8 Illustrations](issues/08-illustrations-assets.md) | Units 1–3 validated, voiced, illustrated and bundled |
-| **2 Core app** | [#9 Architecture](issues/09-app-architecture-data-layer.md) · [#10 Playback](issues/10-audio-playback-service.md) · [#11 Lesson engine](issues/11-lesson-engine-activities.md) · [#12 SRS](issues/12-spaced-repetition-progress.md) · [#13 Kid UX](issues/13-kid-ux-navigation-rewards.md) · [#14 Parent area](issues/14-parent-area.md) | A 6-year-old completes a listening session alone (playtest) |
+| **2 Core app** | [#26 Language packs](issues/26-language-packs.md) · [#9 Architecture](issues/09-app-architecture-data-layer.md) · [#10 Playback](issues/10-audio-playback-service.md) · [#11 Lesson engine](issues/11-lesson-engine-activities.md) · [#12 SRS](issues/12-spaced-repetition-progress.md) · [#13 Kid UX](issues/13-kid-ux-navigation-rewards.md) · [#14 Parent area](issues/14-parent-area.md) | A 6-year-old completes a listening session alone (playtest) |
 | **3 Speaking** | [#15 Mic](issues/15-mic-capture-recording.md) · [#16 Vosk check](issues/16-on-device-word-check-vosk.md) · [#17 Azure stars](issues/17-azure-pronunciation-scoring-stars.md) · [#18 Gateway](issues/18-family-gateway-cloudflare-worker.md) · [#19 Calibration](issues/19-calibration-toolkit.md) | Stars agree with the parent on at least 80% of items |
 | **6a Ship v1** | [#22 Android release](issues/22-android-release-install.md) | **MVP**: v1 on the kids' tablet; upgrades keep progress |
 | **4 Dynamic voice** | [#20](issues/20-dynamic-speech-custom-words.md) | Custom words online and offline |
 | **5 Conversation (optional)** | [#21 Scripted dialogues](issues/21-scripted-conversation-practice.md) | Unit 1 dialogue works offline; a 6-year-old finishes it alone |
 | **6b iPad** | [#23](issues/23-ipad-port.md) | Feature parity on iPad |
+| **7 German** | [#27 German course](issues/27-german-course.md) | Second course on the same engine; German calibration done |
 | **Cross-cutting** | [#24 Privacy & terms](issues/24-privacy-terms-child-safety.md) · [#25 Testing & playtests](issues/25-testing-qa-playtests.md) | Gates for #7, #17, #21; CI suites; playtests |
 
 ### Critical path
@@ -154,6 +156,7 @@ Content writing (#5) is the longest human task. Start it in Phase 0.
 | Azure Speech S0 (only if F0 is exceeded) | ~$1 per audio hour *(verify)* | Likely only with 3+ kids scoring daily |
 | Cloudflare Worker | $0 | Free plan |
 | Conversation practice (scripted dialogues) | $0 | Runs on the device; no cloud |
+| German course (optional) | $0 extra | Scoring shares F0 (~1.7 h per child per language); 2 kids × 2 languages may need S0 |
 | Lesson audio (one-off) | $0 (Azure F0) or $6–22 (one month of ElevenLabs) | |
 | Distribution | $0 Android; $99/yr for iPad later | |
 
@@ -178,6 +181,7 @@ Content writing (#5) is the longest human task. Start it in Phase 0.
 - [ ] Lesson voice and provider — #4, #7, #24
 - [x] No Claude API / no LLMs (decided 2026-11-08) — #21, #24
 - [ ] Build scripted conversation practice (Phase 5) at all — #21
+- [ ] Add German after Spanish v1 (Phase 7) — #27
 - [ ] Repo visibility (private recommended) — #24
 
 ## 9. Working agreements

@@ -12,6 +12,8 @@ parent: 1
 Every fixed clip (words, phrases, stories, prompts, feedback, name lines, dialogue lines) is generated once in the best acceptable voice. Each clip is then trimmed, loudness-normalised, checked by machine, approved by a parent, and bundled. Only parent-added custom words (#20) need live TTS.
 
 ## Choosing the provider
+**Multi-language (#26):** the voice, SSML language and slow rate come from each pack's `language.yaml`. Generate, QA (Whisper `language` per pack) and approve each pack separately, with its own manifest. German (#27) uses Azure `de-DE` voices.
+
 The final pick comes from the audition in #4 and the terms review in #24.
 
 | Provider | Status | Notes |

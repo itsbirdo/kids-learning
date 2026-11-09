@@ -1,6 +1,6 @@
 # Issue specs
 
-> **Status:** created on GitHub as issues [#1–#25](https://github.com/itsbirdo/kids-learning/issues) on 2026-11-08, with matching numbers, labels and issue types. #2–#25 are sub-issues of the epic #1. **The GitHub issues are now the live specs;** these files are the original snapshot.
+> **Status:** created on GitHub as issues [#1–#25](https://github.com/itsbirdo/kids-learning/issues) on 2026-11-08 (#26–#27 added 2026-11-09), with matching numbers, labels and issue types. #2–#25 are sub-issues of the epic #1. **The GitHub issues are now the live specs;** these files are the original snapshot.
 
 One file per GitHub issue, numbered in the order they should be created. GitHub assigns numbers in creation order. In an empty repo the planned numbers (#1–#25) therefore match, and the cross-references (`#7`, `#16`…) work as written.
 
@@ -31,6 +31,8 @@ One file per GitHub issue, numbered in the order they should be created. GitHub 
 | 23 | [iPad port](23-ipad-port.md) | 6 |
 | 24 | [Privacy, terms and child safety](24-privacy-terms-child-safety.md) | cross-cutting |
 | 25 | [Testing, QA and playtests](25-testing-qa-playtests.md) | cross-cutting |
+| 26 | [Multi-language: language packs](26-language-packs.md) | 2 |
+| 27 | [German course](27-german-course.md) | 7 |
 
 ## File format
 Each file starts with front matter, followed by the issue body in Markdown:

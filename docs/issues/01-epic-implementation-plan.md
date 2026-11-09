@@ -44,6 +44,13 @@ The research was re-checked on 2026-11-08; the four verification reports are in 
    - **From motivation research:** no rewards for finishing.
    - **For the family:** a 5-minute "grown-up turn" for the parent.
    - It changes #5, #6, #11, #12, #13, #14, #17, #21 and #25.
+9. **Multi-language by design; German next** ([research](../research/2026-11-09-multilanguage-german.md), [ADR-002](../adr/0002-language-packs.md)). Every component has a German equivalent:
+   - Vosk small German model
+   - Azure scoring `de-DE` and Azure German voices
+   - Android system TTS and Piper Thorsten
+   - Kölner Phonetik for matching
+
+   So language becomes a pluggable "language pack" plus a shared concept bank (pictures, gestures, themes), built in now (#26). German follows as a second course after Spanish v1 (#27).
 
 ## Architecture
 ```mermaid
@@ -76,11 +83,12 @@ flowchart LR
 |---|---|---|
 | 0 Foundations | #2 Stack decision · #3 Scaffolding & CI · #4 Speech & voice spike | Decisions made; the risky parts proven on the real tablet |
 | 1 Content | #5 Curriculum · #6 Content schema & tools · #7 Audio pipeline · #8 Illustrations | Units 1–3 written, voiced and bundled; the rest follow |
-| 2 Core app (offline) | #9 Architecture & data · #10 Audio playback · #11 Lesson engine & activities · #12 Spaced repetition · #13 Kid UX & rewards · #14 Parent area | Playable listening lessons |
+| 2 Core app (offline) | #9 Architecture & data · #10 Audio playback · #11 Lesson engine & activities · #12 Spaced repetition · #13 Kid UX & rewards · #14 Parent area · #26 Language packs | Playable listening lessons; multi-language ready |
 | 3 Speaking | #15 Mic capture · #16 On-device word check · #17 Azure scoring & stars · #18 Gateway · #19 Calibration | Kids say words and earn stars |
 | 4 Dynamic voice | #20 | Names, custom word lists, offline fallback voice |
 | 5 Conversation (optional) | #21 | Scripted, branching role-play dialogues, offline |
 | 6 Ship & extend | #22 Android release & install · #23 iPad port | On the kids' tablet; iPad later |
+| 7 German | #27 German course | Second language pack, same engine |
 | Cross-cutting | #24 Privacy, terms & child safety · #25 Testing & playtests | |
 
 **MVP ("v1 family release")** = Phases 0–3 plus #22. Phases 4–5 and #23 come after.
@@ -89,9 +97,9 @@ flowchart LR
 1. #2, then #3.
 2. #4, with #5 writing running alongside.
 3. #6, then #7 and #8.
-4. #9, then #10 and #12, then #11, then #13 and #14.
+4. #9 and #26, then #10 and #12, then #11, then #13 and #14.
 5. #15, #16, #18, #17, #19.
-6. #22 (MVP), then #20, #21 and #23.
+6. #22 (MVP), then #20, #21, #27 (German) and #23.
 
 #24 and #25 run throughout.
 
@@ -102,6 +110,7 @@ flowchart LR
 - [ ] Lesson voice and provider, after an audition and a terms review — #4, #7, #24
 - [x] No Claude API / no LLMs (decided 2026-11-08) — #21, #24
 - [ ] Whether to build scripted conversation practice (Phase 5) — #21
+- [ ] Add German as a second course after Spanish v1 (Phase 7) — #27
 - [ ] Keep this repo private? (It may hold kids' names and progress exports) — #24
 
 ## Running costs (estimates — check current prices)
@@ -111,6 +120,7 @@ flowchart LR
 | Cloudflare Worker gateway | $0 (free plan) |
 | Lesson audio generation (one-off) | $0 on Azure F0; about $6–22 for one month of ElevenLabs if chosen |
 | Conversation practice (scripted, on-device) | $0 |
+| German course (optional) | $0 extra to run. Its scoring shares the F0 quota (~1.7 h per child per language), so 2 kids × 2 languages may need S0 |
 | Android installs | $0 |
 | iPad later | $99/year Apple Developer Program |
 

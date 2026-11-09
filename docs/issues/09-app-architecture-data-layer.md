@@ -28,15 +28,17 @@ A clean, testable structure that keeps the platform-specific parts small. Recogn
 - Tolerate missing optional clips and images: log them and use fallbacks.
 
 ## Progress database (drift / SQLite)
+**Multi-language (#26):** a child can take several *courses* (target languages). `cards`, `attempts`, `sessions`, `stickers` and `usage` include a `course` column **from the first schema version**, and card keys are `(child_id, course, item_id, skill)`. `ContentCatalog` loads the shared concept bank plus the bundled packs.
+
 | Table | Columns |
 |---|---|
 | `children` | `id, name, age_band (6-7 \| 8-10), avatar, created_at, settings_json` |
-| `cards` | `child_id, item_id, skill (listen \| say), box, due_at, last_seen_at, seen_count, correct_streak, introduced_at`. PK `(child_id, item_id, skill)` |
-| `attempts` | `id, child_id, item_id, skill, at, outcome (correct \| retry \| shown \| heard_none), stars, recognizer_json, scorer_json, duration_ms`. **No audio** |
-| `sessions` | `id, child_id, started_at, ended_at, new_count, review_count, seconds` |
-| `stickers` | `child_id, sticker_id, unit_id, earned_at` |
+| `cards` | `child_id, course, item_id, skill (listen \| say), box, due_at, last_seen_at, seen_count, correct_streak, introduced_at`. PK `(child_id, course, item_id, skill)` |
+| `attempts` | `id, child_id, course, item_id, skill, at, outcome (correct \| retry \| shown \| uncertain \| heard_none), stars, recognizer_json, scorer_json, duration_ms`. **No audio** |
+| `sessions` | `id, child_id, course, started_at, ended_at, new_count, review_count, seconds` |
+| `stickers` | `child_id, course, sticker_id, unit_id, earned_at` |
 | `kv_settings` | `key, value` (family settings) |
-| `usage` | `day, azure_seconds, tts_chars` (local view of the Azure quotas used by #17 and #20) |
+| `usage` | `day, course, azure_seconds, tts_chars` (local view of the Azure quotas used by #17 and #20) |
 
 - Schema versions with tested migrations (`drift` schema dumps in `test/`).
 - `flutter_secure_storage` (Android Keystore) holds the gateway device token and any dev key.

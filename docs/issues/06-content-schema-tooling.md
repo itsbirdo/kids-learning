@@ -11,6 +11,8 @@ parent: 1
 ## Goal
 Lessons live as YAML in `content/`. They are validated in CI and compiled into one bundle the app loads. YAML is the single source of truth: the app never hard-codes lesson data.
 
+**Multi-language (#26):** content is organised as language packs, `content/<lang>/` with a `language.yaml`, plus a shared concept bank, `content/concepts/` (image, gesture, category, English gloss). Pack items reference a concept. All validator rules and `kl build` run per pack (`--pack es`). Text-convention checks, articles and the phonetic key come from the pack's strategies (`spanish`, later `koelner` for German, #27). The example below shows the Spanish pack.
+
 ## Schema (example)
 ```yaml
 # content/units/04-animales.yaml

@@ -18,6 +18,8 @@ We need to know **"Did the child say the expected word?"**:
 Azure can't answer this alone: single words often score about 100 even when wrong.
 
 ## Design
+**Multi-language (#26):** the Vosk model, normaliser and phonetic key come from the active language pack. Spanish uses `vosk-model-small-es-0.42` and `SpanishKey`; German (#27) uses `vosk-model-small-de-0.15` and Kölner Phonetik. The bridge takes the model path as a parameter and keeps one model loaded per active course.
+
 **Kotlin bridge** (local plugin `app/packages/vosk_bridge` or an in-app platform channel)
 - **Library:** `com.alphacephei:vosk-android` (latest 0.3.x, *verify*). The stale `vosk_flutter` package is not used.
 - **Model:** `vosk-model-small-es-0.42` (~39 MB, Apache-2.0), bundled in assets.
